@@ -1,0 +1,5 @@
+﻿  lab2.cpp
+D:\Костя\Основы прогамирования\cpp-base-course\lab2\lab2\lab2.cpp(49): warning C4715: Animals::GetGiraffe: значение возвращается не при всех путях выполнения
+D:\Костя\Основы прогамирования\cpp-base-course\lab2\lab2\lab2.cpp(61): warning C4715: Animals::GetCrocodale: значение возвращается не при всех путях выполнения
+D:\Костя\Основы прогамирования\cpp-base-course\lab2\lab2\lab2.cpp(37): warning C4715: Animals::GetLion: значение возвращается не при всех путях выполнения
+  lab2.vcxproj -> D:\Костя\Основы прогамирования\cpp-base-course\lab2\lab2\Debug\lab2.exe
