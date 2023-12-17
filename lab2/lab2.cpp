@@ -2,106 +2,226 @@
 //
 
 #include <iostream>
-
+#include <vector>
+#include "lab2.h"
 class Animals {
+public:
+    std::string Name;
+    int weight;
+    int age;
+    bool isHungry = true;
+    Animals() {};
+    void virtual changename(std::string name) {
+        Name = name;
+    }
+    void virtual eat() {
+        weight++;
+    }
+    void virtual growing() {
+        age++;
+    }
+    void virtual makeSound() {
+        std::cout << 'igo';
+    }
+    void virtual happy() {
+    }
+    void virtual add() {
+        weight = 0;
+        age = 0;
+    }
+};
+
+class Crocodile : public  Animals{
+public:
+    int tail;
+    int densityscales;
+    Crocodile():Animals(){
+    }
+    void bite() {
+        std::cout << "Crocodile bite you" << "\n";
+    }
+    void eat() override {
+        weight++;
+        tail++;
+        densityscales++;
+    }
+    void add() override {
+        weight = 0;
+        age = 0;
+        tail = 0;
+        densityscales = 0;
+    }
 private:
-    int lion;
-    int giraffe;
-    int crocodale;
+};
+
+class Giraffe : public Animals {
+public:
+    int necklength;
+    int langlength;
+    Giraffe():Animals(){}
+    void happy() override{
+        std::cout << "Giraffe looks happy" << "\n";
+    } 
+    void eat() override {
+        weight ++;
+        necklength += 2;
+        langlength += 1;
+    }
+    void add() override {
+        weight = 0;
+        age = 0;
+        necklength = 0;
+        langlength = 0;
+    }
+};
+
+class Lion : public Animals {
 
 public:
-    Animals(int l, int g, int c);
-    std::string GetLion() const;
-    std::string GetGiraffe() const;
-    std::string GetCrocodale() const;
+    int mane;
+    int wool;
+    Lion() : Animals() {    }
+    void eat() override {
+        weight += 2;
+        mane += 2;
+        wool += 1;
+    }
+    void  makeSound() override {
+        std::cout << "ROAR!" << "\n";
+    }
+    void happy() override {
+        std::cout << "Lion looks happy" << "\n";
+    }
+    void add() override {
+        weight = 0;
+        age = 0;
+        mane = 0;
+        wool = 0;
+    }
+    void bite() {
+        std::cout << "Lion bite you" << "\n";
+    }
 };
-Animals::Animals(int l, int g, int c) {
-    if (l > 0)
-        lion = l;
-    if (g > 0)
-        giraffe = g;
-    if (c > 0)
-        crocodale = c;
-}
-
-std::string Animals::GetLion() const {
-    if (lion == 1) {
-        return "-hand";
-    }
-    if (lion == 2) {
-        return "-(hand+meet)";
-    }
-    if (lion == 3) {
-        return "-hand";
-    }
-}
-
-std::string Animals::GetGiraffe() const {
-    if (giraffe == 1) {
-        return "nothing";
-    }
-    if (giraffe == 2) {
-        return "eats";
-    }
-    if (giraffe == 3) {
-        return "nothing";
-    }
-}
-
-std::string Animals::GetCrocodale() const {
-    if (crocodale == 1) {
-        return "-hand";
-    }
-    if (crocodale == 2) {
-        return "-(hand+meet)";
-    }
-    if (crocodale == 3) {
-        return "-hand";
-    }
-}
 
 int main()
 {
     int x;
     int z;
     int y;
+    std::string name;
     bool flag = true;
+    Lion cell1[9] = {};
+    Giraffe cell2[9] = {};
+    Crocodile cell3[9] = {};
+    int i1 = 0;
+    int i2 = 0;
+    int i3 = 0;
     std::cout << "commands:" << "\n";
+    std::cout << "1 - Lion" << "\n";
+    std::cout << "2 - Giraffe" << "\n";
+    std::cout << "3 - Crocodile" << "\n";
     std::cout << "0 - turn off" << "\n";
-    std::cout << "1 - touch" << "\n";
+    std::cout << "1 - Add animal" << "\n";
     std::cout << "2 - feed" << "\n";
     std::cout << "3 - stroke" << "\n";
+    std::cout << "4 - nothing" << "\n";
+    std::cout << "5 - change name" << "\n";
     while (flag)
     {
-        std::cout << "with lion" << "\n";
+        std::cout << "Choose animal:" << "\n";
         std::cin >> x;
-        std::cout << "with giraffe" << "\n";
+        std::cout << "Choose number:" << "\n";
         std::cin >> y;
-        std::cout << "with crocodale" << "\n";
+        std::cout << "Choose command:" << "\n";
         std::cin >> z;
-        std::cout << "\n";
-        if (x == 0 or y == 0 or z == 0) {
-            flag = false;
+        if (x == 1) {
+            if (y > i1) {
+                std::cout << "none animal" << "\n";
+            }
+            else {
+                if (z == 0) {
+                    flag = 0;
+                }
+                if (z==1,i1 < 8) {
+                    cell1[i1].add();
+                    i1++;
+                }
+                else {
+                    std::cout << "none place" << "\n";
+                }
+                if (z == 2) {
+                    cell1[y].eat();
+                    cell1[y].happy();
+                }
+                if (z == 3) {
+                    cell1[y].bite();
+                }
+                if (z == 4) {
+                    cell1[y].makeSound();
+                }
+                if (z == 5) {
+                    std::cout << "choose name:" << "\n";
+                    std::cin >> name;
+                    cell1[y].changename(name);
+                }
+            }
         }
-        else {
-            Animals Animals(x, y, z);
-            std::cout << "lion:" << "\n";
-            std::cout << Animals.GetLion() << "\n";
-            std::cout << "giraffe:" << "\n";
-            std::cout << Animals.GetGiraffe() << "\n";
-            std::cout << "crocodale:" << "\n";
-            std::cout << Animals.GetCrocodale() << "\n";
+        if (x == 2) {
+            if (y > i2) {
+                std::cout << "none animal" << "\n";
+            }
+            else {
+                if (z == 0) {
+                    flag = 0;
+                }
+                if (z == 1, i2 < 8) {
+                    cell2[i2].add();
+                    i2++;
+                }
+                else {
+                    std::cout << "none place" << "\n";
+                }
+                if (z == 2) {
+                    cell2[y].eat();
+                    cell2[y].happy();
+                }
+                if (z == 3) {
+                    cell2[y].makeSound();
+                }
+                if (z == 5) {
+                    std::cout << "choose name:" << "\n";
+                    std::cin >> name;
+                    cell2[y].changename(name);
+                }
+            }
+        }
+        if (x == 3) {
+            if (y > i2) {
+                std::cout << "none animal" << "\n";
+            }
+            else {
+                if (z == 0) {
+                    flag = 0;
+                }
+                if (z == 1, i3 < 8) {
+                    cell2[i3].add();
+                    i3++;
+                }
+                else {
+                    std::cout << "none place" << "\n";
+                }
+                if (z == 2) {
+                    cell3[y].eat();
+                }
+                if (z == 3) {
+                    cell3[y].bite();
+                }
+                if (z == 5) {
+                    std::cout << "choose name:" << "\n";
+                    std::cin >> name;
+                    cell3[y].changename(name);
+                }
+            }
         }
     }
 }
-
-// Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
-// Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
-
-// Советы по началу работы 
-//   1. В окне обозревателя решений можно добавлять файлы и управлять ими.
-//   2. В окне Team Explorer можно подключиться к системе управления версиями.
-//   3. В окне "Выходные данные" можно просматривать выходные данные сборки и другие сообщения.
-//   4. В окне "Список ошибок" можно просматривать ошибки.
-//   5. Последовательно выберите пункты меню "Проект" > "Добавить новый элемент", чтобы создать файлы кода, или "Проект" > "Добавить существующий элемент", чтобы добавить в проект существующие файлы кода.
-//   6. Чтобы снова открыть этот проект позже, выберите пункты меню "Файл" > "Открыть" > "Проект" и выберите SLN-файл.
